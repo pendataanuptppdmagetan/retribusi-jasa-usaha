@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Perhitungan Retribusi Jasa Usaha</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: #f4f6f8;
+      margin: 0;
+      padding: 20px;
+    }
+    .container {
+      max-width: 700px;
+      margin: auto;
+      background: #ffffff;
+      padding: 20px;
+      border-radius: 8px;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+    }
+    h1, h2 {
+      text-align: center;
+    }
+    label {
+      display: block;
+      margin-top: 15px;
+      font-weight: bold;
+    }
+    input, select, button {
+      width: 100%;
+      padding: 8px;
+      margin-top: 5px;
+      font-size: 14px;
+    }
+    button {
+      margin-top: 20px;
+      background-color: #007bff;
+      color: #fff;
+      border: none;
+      cursor: pointer;
+      border-radius: 4px;
+    }
+    button:hover {
+      background-color: #0056b3;
+    }
+    .result {
+      margin-top: 20px;
+      padding: 15px;
+      background: #e9f5ff;
+      border-radius: 6px;
+      font-size: 16px;
+    }
+    .admin {
+      margin-top: 40px;
+      padding-top: 20px;
+      border-top: 2px dashed #ccc;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>Retribusi Jasa Usaha</h1>
+
+    <!-- Form Pengguna -->
+    <h2>Form Perhitungan</h2>
+    <label>Jenis Pemasangan Iklan</label>
+    <select id="jenis">
+      <option value="banner">Banner</option>
+      <option value="baliho">Baliho</option>
+      <option value="space">Space Promosi</option>
+    </select>
+
+    <label>Luas (m²)</label>
+    <input type="number" id="luas" placeholder="Masukkan luas" />
+
+    <label>Jumlah Hari</label>
+    <input type="number" id="hari" placeholder="Masukkan jumlah hari" />
+
+    <button onclick="hitungRetribusi()">Hitung Retribusi</button>
+
+    <div class="result" id="hasil">Total Retribusi: Rp 0</div>
+
+    <button onclick="kirimWhatsApp()" style="background-color:#25D366; margin-top:10px;">Kirim via WhatsApp</button>
+
+    <!-- Pengaturan Tarif (Admin) -->
+    <div class="admin">
+      <h2>Pengaturan Tarif (Admin)</h2>
+
+      <label>Tarif Banner (Rp / m² / hari)</label>
+      <input type="number" id="tarifBanner" value="5000" />
+
+      <label>Tarif Baliho (Rp / m² / hari)</label>
+      <input type="number" id="tarifBaliho" value="10000" />
+
+      <label>Tarif Space Promosi (Rp / m² / hari)</label>
+      <input type="number" id="tarifSpace" value="8000" />
+    </div>
+  </div>
+
+  <script>
+    function hitungRetribusi() {
+      const jenis = document.getElementById('jenis').value;
+      const luas = parseFloat(document.getElementById('luas').value) || 0;
+      const hari = parseFloat(document.getElementById('hari').value) || 0;
+
+      const tarifBanner = parseFloat(document.getElementById('tarifBanner').value) || 0;
+      const tarifBaliho = parseFloat(document.getElementById('tarifBaliho').value) || 0;
+      const tarifSpace = parseFloat(document.getElementById('tarifSpace').value) || 0;
+
+      let tarif = 0;
+      if (jenis === 'banner') tarif = tarifBanner;
+      if (jenis === 'baliho') tarif = tarifBaliho;
+      if (jenis === 'space') tarif = tarifSpace;
+
+      const total = tarif * luas * hari;
+      document.getElementById('hasil').innerText = 'Total Retribusi: Rp ' + total.toLocaleString('id-ID');
+    }
+      function kirimWhatsApp() {
+      const jenis = document.getElementById('jenis').value;
+      const luas = document.getElementById('luas').value;
+      const hari = document.getElementById('hari').value;
+      const hasil = document.getElementById('hasil').innerText;
+
+      const nomorWA = '6281554664341'; // GANTI dengan nomor WhatsApp tujuan
+
+      const pesan = `Permohonan Informasi Retribusi Jasa Usaha%0A%0A` +
+        `Jenis Iklan : ${jenis}%0A` +
+        `Luas        : ${luas} m2%0A` +
+        `Durasi      : ${hari} hari%0A` +
+        `${hasil}%0A%0A` +
+        `Mohon ditindaklanjuti. Terima kasih.`;
+
+      const url = `https://wa.me/${nomorWA}?text=${pesan}`;
+      window.open(url, '_blank');
+    }
+  </script>
+</body>
+</html>
