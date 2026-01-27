@@ -7,7 +7,7 @@
 
   <!-- GOOGLE ANALYTICS GA4 -->
   <!-- GANTI G-XXXXXXXXXX dengan Measurement ID Anda -->
-  <script async src="https://www.googletagmanager.com/gtag/js?id=F0LPTJ4WFX"></script>
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-F0LPTJ4WFX"></script>
   <script>
     window.dataLayer = window.dataLayer || [];
     function gtag(){dataLayer.push(arguments);}
@@ -94,6 +94,9 @@
     <label>Jumlah Hari</label>
     <input type="number" id="hari" placeholder="Masukkan jumlah hari" />
 
+    <label>Nama Pemesan</label>
+    <input type="text" id="namaPemesan" placeholder="Masukkan nama pemesan" />
+
     <button onclick="hitungRetribusi()">Hitung Retribusi</button>
 
     <div class="result" id="hasil">Total Retribusi: Rp 0</div>
@@ -139,12 +142,14 @@
       const jenis = document.getElementById('jenis').value;
       const luas = document.getElementById('luas').value;
       const hari = document.getElementById('hari').value;
+      const nama = document.getElementById('namaPemesan').value;
       const hasil = document.getElementById('hasil').innerText;
 
       const nomorWA = '6281234567890'; // GANTI dengan nomor WhatsApp tujuan resmi
 
       const pesan = `Permohonan Informasi Retribusi Jasa Usaha%0A%0A` +
-        `Jenis Iklan : ${jenis}%0A` +
+        `Nama Pemesan : ${nama}%0A
+        Jenis Iklan : ${jenis}%0A` +
         `Luas        : ${luas} m2%0A` +
         `Durasi      : ${hari} hari%0A` +
         `${hasil}%0A%0A` +
