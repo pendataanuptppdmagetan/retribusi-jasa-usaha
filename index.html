@@ -4,6 +4,17 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Perhitungan Retribusi Jasa Usaha</title>
+
+  <!-- GOOGLE ANALYTICS GA4 -->
+  <!-- GANTI G-XXXXXXXXXX dengan Measurement ID Anda -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-XXXXXXXXXX"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-XXXXXXXXXX');
+  </script>
+
   <style>
     body {
       font-family: Arial, sans-serif;
@@ -44,6 +55,10 @@
     button:hover {
       background-color: #0056b3;
     }
+    .wa-btn {
+      background-color: #25D366;
+      margin-top: 10px;
+    }
     .result {
       margin-top: 20px;
       padding: 15px;
@@ -62,13 +77,14 @@
   <div class="container">
     <h1>Retribusi Jasa Usaha</h1>
 
-    <!-- Form Pengguna -->
+    <!-- FORM PENGGUNA -->
     <h2>Form Perhitungan</h2>
+
     <label>Jenis Pemasangan Iklan</label>
     <select id="jenis">
-      <option value="banner">Banner</option>
-      <option value="baliho">Baliho</option>
-      <option value="space">Space Promosi</option>
+      <option value="Banner">Banner</option>
+      <option value="Baliho">Baliho</option>
+      <option value="Space Promosi">Space Promosi</option>
     </select>
 
     <label>Luas (m²)</label>
@@ -81,9 +97,9 @@
 
     <div class="result" id="hasil">Total Retribusi: Rp 0</div>
 
-    <button onclick="kirimWhatsApp()" style="background-color:#25D366; margin-top:10px;">Kirim via WhatsApp</button>
+    <button class="wa-btn" onclick="kirimWhatsApp()">Kirim via WhatsApp</button>
 
-    <!-- Pengaturan Tarif (Admin) -->
+    <!-- PENGATURAN TARIF ADMIN -->
     <div class="admin">
       <h2>Pengaturan Tarif (Admin)</h2>
 
@@ -109,20 +125,21 @@
       const tarifSpace = parseFloat(document.getElementById('tarifSpace').value) || 0;
 
       let tarif = 0;
-      if (jenis === 'banner') tarif = tarifBanner;
-      if (jenis === 'baliho') tarif = tarifBaliho;
-      if (jenis === 'space') tarif = tarifSpace;
+      if (jenis === 'Banner') tarif = tarifBanner;
+      if (jenis === 'Baliho') tarif = tarifBaliho;
+      if (jenis === 'Space Promosi') tarif = tarifSpace;
 
       const total = tarif * luas * hari;
       document.getElementById('hasil').innerText = 'Total Retribusi: Rp ' + total.toLocaleString('id-ID');
     }
-      function kirimWhatsApp() {
+
+    function kirimWhatsApp() {
       const jenis = document.getElementById('jenis').value;
       const luas = document.getElementById('luas').value;
       const hari = document.getElementById('hari').value;
       const hasil = document.getElementById('hasil').innerText;
 
-      const nomorWA = '6281554664341'; // GANTI dengan nomor WhatsApp tujuan
+      const nomorWA = '6281234567890'; // GANTI dengan nomor WhatsApp tujuan resmi
 
       const pesan = `Permohonan Informasi Retribusi Jasa Usaha%0A%0A` +
         `Jenis Iklan : ${jenis}%0A` +
